@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-srcdir="/Users/sabbir/Projects/rnd/el-build"
+srcdir=`pwd`
 _chromiumver=53.0.2785.143
 arch=('i686' 'x86_64')
 pkgver="1.4.14"
@@ -83,7 +83,7 @@ rm patches/third_party/ffmpeg/ffmpeg.patch  # Use system ffmpeg
 echo 'Download chromium src...'
 wget -c https://github.com/zcbenz/chromium-source-tarball/releases/download/${_chromiumver}/chromium-${_chromiumver}.tar.xz
 echo 'Extracting chromium source...'
-tar -xJf chromium-${_chromiumver}.tar.xz
+tar -xvJf chromium-${_chromiumver}.tar.xz
 mv chromium-${_chromiumver} src
 if [ ! -e src/.version ]; then
   echo "${_chromiumver}" > src/.version
