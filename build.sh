@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 srcdir=`pwd`
-_target=x64
+_target="x64"
 
 cd "${srcdir}"/electron
 LDFLAGS="${LDFLAGS} -Wl,-z,noexecstack"
