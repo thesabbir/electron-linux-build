@@ -80,14 +80,19 @@ patch -Np1 -i "${srcdir}"/patches/libchromiumcontent-use-system-tools.patch
 patch -Np1 -i "${srcdir}"/patches/libchromiumcontent-use-system-ffmpeg.patch
 patch -Np1 -i "${srcdir}"/patches/libchromiumcontent-static-library-only.patch
 rm patches/third_party/ffmpeg/ffmpeg.patch  # Use system ffmpeg
-echo 'Download chromium src...'
-wget -c https://github.com/zcbenz/chromium-source-tarball/releases/download/${_chromiumver}/chromium-${_chromiumver}.tar.xz
-echo 'Extracting chromium source...'
-tar -xvJf chromium-${_chromiumver}.tar.xz
-mv chromium-${_chromiumver} src
+
+if [ ! -e src ]; then
+    echo 'Download chromium src...'
+    wget -c https://github.com/zcbenz/chromium-source-tarball/releases/download/${_chromiumver}/chromium-${_chromiumver}.tar.xz
+    echo 'Extracting chromium source...'
+    tar -xvJf chromium-${_chromiumver}.tar.xz
+    mv chromium-${_chromiumver} src
+fi
+
 if [ ! -e src/.version ]; then
   echo "${_chromiumver}" > src/.version
 fi
+
 cd src
 patch -Np1 -i "${srcdir}"/patches/chromium-cups.patch  # fixes build with CUPS 2.2
 patch -Np1 -i "${srcdir}"/patches/chromium-gtk3.patch
